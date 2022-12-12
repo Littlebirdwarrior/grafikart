@@ -93,7 +93,7 @@ class Library {
         for(let book of books) {
             this.addBook(book)
         }
-    }//ForEach, this est undefined, origine d'une erreur
+    }//ForEach, this est undefined, origine d'une erreur car this désigne autre chose, je n'arrive pas à le débuger
 
 //filter, crée une shallow copie du tableau
     findBooksByLetter(letter) {
