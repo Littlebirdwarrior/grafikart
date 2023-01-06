@@ -73,20 +73,39 @@ des manipulations fines de données dans Node.js. => https://www.digitalocean.co
 birthtime: 2023-01-03T17:49:07.267Z date de création
 * */
 
-//****************Open (ouvrir et verrouiller un fichier pd modification, utile si boucles)
-import {open} from 'node:fs/promises'
-const file = await open ('demo-deep.txt', 'a')//flag permet éviter réécriture
-file.write(' Hello')//action
-file.close()//ferme le fichier
+// //****************Open (ouvrir et verrouiller un fichier pd modification, utile si boucles)
+// import {open} from 'node:fs/promises'
+// const file = await open ('demo-deep.txt', 'a')//flag permet éviter réécriture
+// file.write(' Hello')//action
+// file.close()//ferme le fichier
+//
+// //**************** watch (Observer un dossier et liste tous évènement)
+//
+// import {watch} from 'node:fs/promises'
+// //retour de watch, pas promesses mais asynciterator, un for of qui renvois une promesse à chaque tours
+// //plusieurs options, dont récursives, observe ts les fichier
+// const watcher = watch('./') //ici, observe le chemain courant
+// for await (const event of watcher) {//for await, évite le watcher
+//     console.log(event)
+// }//ici pas de résultat terminal, process ne se quitte pas jusqu'a évenement
+// //objet et méthode de type change dans terminal (rename, change)
+// //coupe évènement cmd c
 
-//**************** watch (Observer un dossier et liste tous évènement)
 
-import {watch} from 'node:fs/promises'
-//retour de watch, pas promesses mais asynciterator, un for of qui renvois une promesse à chaque tours
-//plusieurs options, dont récursives, observe ts les fichier
-const watcher = watch('./') //ici, observe le chemain courant
-for await (const event of watcher) {//for await, évite le watcher
-    console.log(event)
-}//ici pas de résultat terminal, process ne se quitte pas jusqu'a évenement
-//objet et méthode de type change dans terminal (rename, change)
-//coupe évènement cmd c
+
+import { readdir } from 'node:fs/promises'
+import { stat } from 'node:fs/promises'
+
+//Exercice - readdir
+/*créer une fonction permettant de lister les éléments qui se situent dans le fichier courant,
+et ce de manière non récurssive*/
+
+// try {
+//     const files = await readdir('./', {withFileTypes : true})//sauvegarder liste des fichiers dispo à la racine ds files
+//     for (const file of files)
+//         console.log(`${file.isDirectory() ? 'D' : 'F'} - ${file.name}`)
+//         // //ici, notation en ternaire qui pose condition "est-ce un dossier", si oui, 'D', si contraire "F"
+// } catch (err) {
+//     console.error(err);
+// }
+

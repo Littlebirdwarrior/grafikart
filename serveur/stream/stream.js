@@ -53,6 +53,7 @@ readStream.on('end', () => {
 })
 
 //je crée une fonction pour coordonée la lecture et l'écriture de fichiers
+
 readStream.pipe(writeStream) // Pipe, flux de lecture envoyé dans un flux d'écriture simultanément
 
 // // Le flux writeStream sera clôturé automatiquement à la fin de la lecture et
