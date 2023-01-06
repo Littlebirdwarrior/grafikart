@@ -33,13 +33,31 @@ source : https://blog.engineering.publicissapient.fr/2020/02/19/implementer-et-c
 // le stream permet de séquencer les données et de les envoyer progressivement
 
 import { createReadStream } from 'node:fs'
+import { createWriteStream} from 'node:fs'
+import { stat } from 'node:fs/promises';
 
-const readStream = createReadstream('video.mp4')
-const writeStream = createWriteStream('video-copy.mp4');
+const readStream = createReadStream('video-1.mp4')
+const writeStream = createWriteStream('video-1-copy.mp4')
+const {size} = await stat('video-1.mp4')
+let read = 0
+let progress = 0
+
+//je crée une fonction pour suivre l'avencée de lecture du readStream
+readStream.on('data', (chunk) => {
+    read += chunk.length
+    progress = Math.round(100* read/size)
+    console.log(progress)
+})
+readStream.on('end', () => {
+    console.log('fin de la lecture')
+})
+
+//je crée une fonction pour coordonée la lecture et l'écriture de fichiers
 readStream.pipe(writeStream) // Pipe, flux de lecture envoyé dans un flux d'écriture simultanément
-// Le flux writeStream sera clôturé automatiquement à la fin de la lecture et
-// La synchronisation est gérée en interne et si un des flux est plus lent alors
-// la lecture ou l'écriture pourra être mis en pause afin d'optimiser les performances.
+
+// // Le flux writeStream sera clôturé automatiquement à la fin de la lecture et
+// // La synchronisation est gérée en interne et si un des flux est plus lent alors
+// // la lecture ou l'écriture pourra être mis en pause afin d'optimiser les performances.
 
 /* le stream est un type de donnée que l'on retrouvera dans de nombreux module de NodeJS :
  - process.stdout et process.stderr sont des flux d'écriture permettant d'afficher des informations au niveau du terminal.
