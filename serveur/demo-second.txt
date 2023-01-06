@@ -1,0 +1,3 @@
+//Objectif:  lire ce texte
+Voici mon texte : text text text text
+ Bonjour les gens Bonjour les gens
