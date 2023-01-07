@@ -93,19 +93,47 @@ birthtime: 2023-01-03T17:49:07.267Z date de création
 
 
 
-import { readdir } from 'node:fs/promises'
-import { stat } from 'node:fs/promises'
+
 
 //Exercice - readdir
 /*créer une fonction permettant de lister les éléments qui se situent dans le fichier courant,
 et ce de manière non récurssive*/
 
+import { readdir } from 'node:fs/promises'
+import { stat } from 'node:fs/promises'
+
+const wait = (duration) => new Promise(resolve => setTimeout(resolve, duration))
+
 // try {
 //     const files = await readdir('./', {withFileTypes : true})//sauvegarder liste des fichiers dispo à la racine ds files
-//     for (const file of files)
-//         console.log(`${file.isDirectory() ? 'D' : 'F'} - ${file.name}`)
+//     for (const file of files) {
+//         const {size} = await stat(file.name) //ici, on utilise la partition {}, on isole une seule propriété de stat - la size
+//         console.log(`${file.isDirectory() ? 'D' : 'F'} - ${file.name} -${size}oct`)
 //         // //ici, notation en ternaire qui pose condition "est-ce un dossier", si oui, 'D', si contraire "F"
+//     }
 // } catch (err) {
 //     console.error(err);
 // }
 
+
+//// solution plus rapide
+try {
+    console.time('label')
+    const files = await readdir('./', {withFileTypes : true})//sauvegarder liste des fichiers dispo à la racine ds files
+    await Promise.allSettled(
+        files.map(async (file) => {
+            const parts = [
+                file.isDirectory() ? 'D' : 'F',
+                file.name
+            ]
+            if (!file.isDirectory()){
+                const {size} = await stat(file.name)
+                parts.push(`${size}o`)
+            }
+            console.log(parts.join(' - '))
+        })
+    )
+} catch (err) {
+    console.error(err);
+}
+console.timeEnd('label')
