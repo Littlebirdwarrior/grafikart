@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises'
 //ENOENT - erreur synifie que l'on ne trouve pas le fichier
 //Parfois, pas acces au fichier courant, dans ce cas :
-console.log(import.meta.url) //permet récupère le nom du ficher dans terminal : file:///Users/camille/Sites/github/grafikart/serveur/demo-deep/app-deep.js
+console.log(import.meta.url) //permet récupère le nom du ficher dans terminal : file:///Users/camille/Sites/github/grafikart/cote-serveur/demo-deep/app-deep.js
 //URL, pas pratique, pour retrouver chemain relatif
 import {fileURLToPath} from 'node:url'
 console.log(fileURLToPath(import.meta.url))

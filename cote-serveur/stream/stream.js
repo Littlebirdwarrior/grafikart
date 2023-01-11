@@ -62,5 +62,5 @@ readStream.pipe(writeStream) // Pipe, flux de lecture envoyé dans un flux d'éc
 
 /* le stream est un type de donnée que l'on retrouvera dans de nombreux module de NodeJS :
  - process.stdout et process.stderr sont des flux d'écriture permettant d'afficher des informations au niveau du terminal.
- - http.ServerResponse, l'objet permettant de représenter une réponse du serveur HTTP, sera un flux dans lequel on pourra écrire.
- - http.IncomingMessage, l'objet qui représentera une requête entrante dans le cas d'un serveur HTTP sera un flux accessible en lecture.*/
+ - http.ServerResponse, l'objet permettant de représenter une réponse du cote-serveur HTTP, sera un flux dans lequel on pourra écrire.
+ - http.IncomingMessage, l'objet qui représentera une requête entrante dans le cas d'un cote-serveur HTTP sera un flux accessible en lecture.*/

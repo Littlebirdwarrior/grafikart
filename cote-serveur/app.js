@@ -119,7 +119,7 @@ const wait = (duration) => new Promise(resolve => setTimeout(resolve, duration))
 //// solution plus rapide
 try {
     console.time('label')
-    const files = await readdir('./', {withFileTypes : true})//sauvegarder liste des fichiers dispo à la racine ds files
+    const files = await readdir('./', {withFileTypes : true})
     await Promise.allSettled(
         files.map(async (file) => {
             const parts = [

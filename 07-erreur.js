@@ -45,7 +45,7 @@ function promptRectangle(){
         /* Le catch dans console souvent illisible,
         Il est possible de re-envoyer une erreur et
         d'utiliser la cause pour conserver la cause originale du problème
-        On peut mettre un code erreur (ex: dans la construction de serveur, cause : 404)*/
+        On peut mettre un code erreur (ex: dans la construction de cote-serveur, cause : 404)*/
     }catch (e){
         throw new Error ('Entrée utilisateur invalide', {cause: e})
     }
